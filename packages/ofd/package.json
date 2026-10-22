@@ -30,7 +30,7 @@
   ],
   "scripts": {
     "dev": "vite",
-    "build": "vite build --mode lib && rm -rf dist/fonts && cp -r public/fonts dist/fonts",
+    "build": "vite build --mode lib && node scripts/copyFonts.mjs",
     "type:check": "tsc --noEmit"
   },
   "peerDependencies": {

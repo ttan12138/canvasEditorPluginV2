@@ -26,6 +26,7 @@
     "clean": "lerna clean --yes && rm -rf node_modules",
     "clean:dist": "rm -rf ./packages/**/dist",
     "build": "lerna run build",
+    "build:copy": "node scripts/buildCopy.mjs",
     "test": "lerna run test",
     "dev": "lerna run dev",
     "type:check": "lerna run type:check",
