@@ -979,10 +979,8 @@ class DocxParser {
       ? this.headingByStyleId.get(pStyleId)
       : undefined
 
-    const prefix: IElement[] = pPr?.getElementsByTagName('w:pageBreakBefore')
-      .length
-      ? [{ value: '', type: ElementType.PAGE_BREAK }]
-      : []
+    // 忽略分页符控件（w:pageBreakBefore）
+    const prefix: IElement[] = []
 
     // 段落底边框的空段落 -> 分隔线（Word"下框线"）
     const separator = this.parseBorderSeparator(p, pPr)
@@ -1384,9 +1382,8 @@ class DocxParser {
           })
         }
       } else if (tag === 'w:br') {
-        if (child.getAttribute('w:type') === 'page') {
-          elements.push({ value: '', type: ElementType.PAGE_BREAK })
-        } else {
+        // 忽略分页符控件（w:br w:type="page"）
+        if (child.getAttribute('w:type') !== 'page') {
           appendLineBreak(elements, style)
         }
       } else if (tag === 'w:tab') {
